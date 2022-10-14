@@ -2,6 +2,12 @@
 
 public static class DefaultIList
 {
+    /// <summary>
+    /// 嵌套IEnumerable泛型转HashSet
+    /// </summary>
+    /// <param name="source">源输入</param>
+    /// <typeparam name="T">源输入类型(泛型)</typeparam>
+    /// <exception cref="ArgumentNullException"></exception>
     public static HashSet<dynamic> NestedToHastSet<T>(this T? source)
     {
         if (source is null)
@@ -14,6 +20,12 @@ public static class DefaultIList
         return inout;
     }
 
+    /// <summary>
+    /// 自调用方法
+    /// </summary>
+    /// <param name="thing">源输入</param>
+    /// <param name="hash">HashSet输出</param>
+    /// <typeparam name="T">预判类型</typeparam>
     private static void LoopBackFunc<T>(T thing, ref HashSet<dynamic> hash)
     {
         if (typeof(T).GenericTypeArguments.Any() &&
