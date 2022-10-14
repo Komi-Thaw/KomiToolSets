@@ -8,6 +8,3 @@
 1. - [ ] 完善StringPack的功能
 2. - [ ] 完善IListPack的功能
 3. - [ ] 新增雪花算法ID生成功能
-
-### 感谢技术支持
-https://www.jetbrains.com/rider/
