@@ -34,7 +34,7 @@ public static class DefaultString
     /// <param name="block2">被比对对象</param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static (bool isIdentical, string lines) DiffWithEveryLine(string block1, string block2)
+    public static (bool isIdentical, string lines) DiffWithEveryLine(this string block1, string block2)
     {
         if (string.IsNullOrEmpty(block1) || string.IsNullOrEmpty(block2))
             throw new ArgumentNullException(

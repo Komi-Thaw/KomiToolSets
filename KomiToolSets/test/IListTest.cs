@@ -1,5 +1,4 @@
-﻿using KomiToolSets.IListPack;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace KomiToolSets.test;
 
@@ -9,11 +8,5 @@ public class IListTest
     [Test]
     public void Invoke()
     {
-        IEnumerable<IEnumerable<IEnumerable<string>>> a = new List<List<List<string>>>
-        {
-            new() { new() { "xim", "xim", "hash" }, new() { "xim", "xim", "jinx" } },
-            new() { new() { "zack", "riders" } }
-        };
-        var data = a.NestedToHastSet();
     }
 }

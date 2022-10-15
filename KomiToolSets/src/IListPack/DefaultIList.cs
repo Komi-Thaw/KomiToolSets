@@ -1,4 +1,6 @@
-﻿namespace KomiToolSets.IListPack;
+﻿using Newtonsoft.Json;
+
+namespace KomiToolSets.IListPack;
 
 public static class DefaultIList
 {
@@ -42,5 +44,16 @@ public static class DefaultIList
         {
             hash.Add(moon);
         }
+    }
+
+    /// <summary>
+    /// 多项去重
+    /// </summary>
+    /// <param name="source">源输入</param>
+    /// <typeparam name="T">源输入泛型</typeparam>
+    public static IEnumerable<T> ToDistinctEnumerable<T>(this IEnumerable<T> source) where T : notnull
+    {
+        return source.Select(x => JsonConvert.ToString(x)).Distinct()
+            .Select(value => JsonConvert.DeserializeObject<T>(value)!);
     }
 }
