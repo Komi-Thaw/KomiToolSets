@@ -49,7 +49,7 @@ public class IdWorker
         if (flake is not null) return flake;
         lock (Sync)
         {
-            return flake ?? new IdWorker();
+            return flake ??= new IdWorker();
         }
     }
 
