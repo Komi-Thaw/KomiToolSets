@@ -59,6 +59,21 @@ public static class DefaultString
         var res = !fau ? lineNums.Select(x => x.ToString()).Aggregate((s, s1) => s + "," + s1) : default;
         return (fau, res)!;
     }
+
+    /// <summary>
+    /// 快速查找字符串中是否存在某个字符
+    /// </summary>
+    /// <param name="source">源输入</param>
+    /// <param name="single">需要查找的字符</param>
+    public static bool CharContains(this string source, char single)
+    {
+        if (string.IsNullOrEmpty(source))
+            throw new ArgumentException($"{nameof(source)} value is empty!");
+
+        var index = source.ToCharArray().ToList().BinarySearch(single);
+
+        return index >= 0;
+    }
 }
 
 public enum trimOptions
