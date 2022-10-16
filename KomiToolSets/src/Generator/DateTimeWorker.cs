@@ -2,6 +2,9 @@
 
 namespace KomiToolSets.Generator;
 
+/// <summary>
+/// Datetime Helper
+/// </summary>
 public class DateTimeWorker
 {
     public static long UnixSecondEpoch => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
@@ -10,6 +13,12 @@ public class DateTimeWorker
 
     public static long UnixTicks => DateTimeOffset.UnixEpoch.Ticks;
 
+    /// <summary>
+    /// 计算天数差距
+    /// </summary>
+    /// <param name="darg1">比对时间参数</param>
+    /// <param name="darg2">被比对时间参数</param>
+    /// <returns></returns>
     public static int DaysElapsed(DateTime darg1, DateTime darg2)
     {
         TimeSpan result;

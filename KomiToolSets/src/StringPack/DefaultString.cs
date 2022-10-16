@@ -1,5 +1,8 @@
 ﻿namespace KomiToolSets.StringPack;
 
+/// <summary>
+/// String Helper
+/// </summary>
 public static class DefaultString
 {
     /// <summary>

@@ -3,6 +3,9 @@ using NUnit.Framework;
 
 namespace KomiToolSets.test;
 
+/// <summary>
+/// 基准测试
+/// </summary>
 [TestFixture]
 public class TestEntrance
 {

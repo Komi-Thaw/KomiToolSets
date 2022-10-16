@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace KomiToolSets.IListPack;
 
+/// <summary>
+/// IEnumerable Helper
+/// </summary>
 public static class DefaultIEnumerable
 {
     /// <summary>
