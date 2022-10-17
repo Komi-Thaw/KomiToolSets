@@ -4,9 +4,9 @@ public class IdWorker
 {
     private static long Machine_Id; // Machine ID
 
-    private static long Data_Center_Id = 0L; //Data ID
+    private static long Data_Center_Id; //Data ID
 
-    private static long Sequence = 0L; //Counting starts from zero
+    private static long Sequence; //Counting starts from zero
 
     private static long rdepoch = 687888001020L; // Unique Time Epoch
 
@@ -69,7 +69,7 @@ public class IdWorker
         Snowflakes(machineId, datacenterId);
     }
 
-    private void Snowflakes(long machineId, long datacenterId)
+    private static void Snowflakes(long machineId, long datacenterId)
     {
         if (machineId >= 0)
         {
@@ -124,7 +124,7 @@ public class IdWorker
     }
 
     ///<summary> 
-    /// 获取ID
+    /// 生成ID
     ///</summary> 
     ///<returns></returns> 
     public long Generate()
