@@ -23,7 +23,8 @@ public class RestHelper
         };
     };
 
-    public async static Task<string> PostSend(int content_form, int timeout_span, bool configure_await = false)
+    public async static Task<string> PostSend(int content_form = 1, int timeout_span = 5000,
+        bool configure_await = false)
     {
         using var cli = new RestClient();
 
