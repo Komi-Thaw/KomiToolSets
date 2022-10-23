@@ -37,18 +37,25 @@ public class TimerNQueue<T>
 
     private bool DequeueAction()
     {
-        var def_return = true;
+        bool def_return;
+        var task_list = new List<Task>();
 
         lock (lock_this)
         {
+            var def_return_val = true;
             var ienum = _queue.Where(x =>
                     x.Item1.ToString("YYYY-MM-dd hh24:mm").Equals(DateTimeOffset.UtcNow.ToString("YYYY-MM-dd hh24:mm")))
                 .ToList();
+
             ienum.ForEach(delegate((DateTime dateTime, Action<T> action, T source) value)
             {
-                value.action.Invoke(value.source);
-                def_return |= _queue.TryDequeue(out value);
+                task_list.Add(Task.Run(() =>
+                {
+                    value.action.Invoke(value.source);
+                    def_return_val |= _queue.TryDequeue(out value);
+                }));
             });
+            def_return = Task.WhenAll(task_list).IsCompletedSuccessfully && def_return_val;
         }
 
         return def_return;
