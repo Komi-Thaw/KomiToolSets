@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json.Linq;
+using RestSharp;
 
 namespace KomiToolSets.RestPack;
 
@@ -12,6 +13,8 @@ public class RestHelper
 
     public static Dictionary<string, string> header_dic = new();
 
+    public static string json_body_value = string.Empty;
+
     private static Func<int, string> content_type_fetch = form =>
     {
         return form switch
@@ -23,8 +26,16 @@ public class RestHelper
         };
     };
 
+    /// <summary>
+    /// Post请求
+    /// </summary>
+    /// <param name="content_form">content-type类型 1-application/json 2-form-data 3-multipart-form-data</param>
+    /// <param name="timeout_span">请求超时时间 默认为5s</param>
+    /// <param name="configure_await">用于UI界面的等待 默认为false</param>
+    /// <param name="is_json_format">是否有json格式的body 默认为false</param>
+    /// <returns></returns>
     public async static Task<string> PostSend(int content_form = 1, int timeout_span = 5000,
-        bool configure_await = false)
+        bool configure_await = false, bool is_json_format = false)
     {
         using var cli = new RestClient();
 
@@ -35,6 +46,10 @@ public class RestHelper
                 Parameter.CreateParameter(x.Key, x.Value, ParameterType.RequestBody)));
 
         rest.Timeout = timeout_span;
+
+        var rest_json_parameter = is_json_format ? JObject.Parse(json_body_value) : new JObject();
+
+        if (is_json_format) rest.AddJsonBody(rest_json_parameter);
 
         rest.AddOrUpdateParameters(params_fetch);
 
