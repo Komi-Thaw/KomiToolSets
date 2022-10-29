@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Collections.Immutable;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 
@@ -69,16 +70,16 @@ public static class DefaultIEnumerable
     /// <param name="source">源输入</param>
     /// <typeparam name="T">源输入泛型</typeparam>
     /// <returns></returns>
-    public static void LazyReturnValue<T>(this IEnumerable<T> source, out List<T> outlet)
+    public static IEnumerable<T?> LazyReturnValue<T>(this IEnumerable<T> source)
         where T : notnull
     {
-        outlet = new List<T>();
+        var enumerable = source.ToImmutableList();
 
-        if (!source.Any()) return;
+        var res = CollectionsMarshal.AsSpan(enumerable.DefaultIfEmpty().ToList());
 
-        foreach (var data in CollectionsMarshal.AsSpan(source.DefaultIfEmpty().ToList()))
+        for (var idx = 0; idx < res.Length; idx++)
         {
-            outlet.Add(data!);
+            yield return res[idx];
         }
     }
 

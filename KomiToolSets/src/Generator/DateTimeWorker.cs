@@ -5,7 +5,7 @@ namespace KomiToolSets.Generator;
 /// <summary>
 /// Datetime Helper
 /// </summary>
-public class DateTimeWorker
+public static class DateTimeWorker
 {
     public static long UnixSecondEpoch => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
