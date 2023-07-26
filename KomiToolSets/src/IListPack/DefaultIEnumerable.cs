@@ -70,16 +70,14 @@ public static class DefaultIEnumerable
     /// <param name="source">源输入</param>
     /// <typeparam name="T">源输入泛型</typeparam>
     /// <returns></returns>
-    public static IEnumerable<T?> LazyReturnValue<T>(this IEnumerable<T> source)
+    public static IEnumerable<T> LazyReturnValue<T>(this IEnumerable<T> source)
         where T : notnull
     {
-        var enumerable = source.ToImmutableList();
+        var res = new ReadOnlyMemory<T>(source.ToArray());
 
-        var res = CollectionsMarshal.AsSpan(enumerable.DefaultIfEmpty().ToList());
-
-        for (var idx = 0; idx < res.Length; idx++)
+        foreach(var ind in MemoryMarshal.ToEnumerable<T>(res))
         {
-            yield return res[idx];
+            yield return ind;
         }
     }
 

@@ -124,6 +124,9 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
+# Visual Studio configuration files
+.vs/*
+
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
